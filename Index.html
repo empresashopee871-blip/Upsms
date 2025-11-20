@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Envio de SMS em Massa</title>
+<style>
+    body { font-family: Arial; padding: 20px; background: #111; color: #fff; }
+    h2 { color: #0f0; }
+    button {
+        background: #0f0; border: none; padding: 12px 20px;
+        font-size: 18px; font-weight: bold; border-radius: 8px;
+        cursor: pointer;
+        margin-top: 10px;
+        display:block;
+        width:100%;
+    }
+    #numeroAtual {
+        background:#222; padding:10px; border-radius:8px;
+        font-size:18px; margin-bottom:10px;
+    }
+    .telegram {
+        display:block;
+        margin-top:20px;
+        background:#0088cc;
+        padding:12px;
+        border-radius:10px;
+        text-align:center;
+        color:white;
+        font-size:18px;
+        text-decoration:none;
+        font-weight:bold;
+    }
+    .tutorial {
+        margin-top:25px;
+        background:#222;
+        padding:15px;
+        border-radius:10px;
+        display:flex;
+        align-items:center;
+        gap:15px;
+    }
+    .tutorial-icon {
+        font-size:35px;
+    }
+</style>
+</head>
+<body>
+
+<h2>Envio de SMS / RCS / Instagram / Facebook</h2>
+
+<p><b>Mensagem fixa:</b></p>
+<div style="background:#222; padding:10px; border-radius:8px; white-space:pre-line;">
+Você Tem 8R$ De Bonus Para Resgatar Registre Agora
+https://www.2899bet333.com/?id=937667970
+</div><br><br>
+
+<h3>📱 Número atual:</h3>
+<div id="numeroAtual">Carregando...</div>
+
+<button onclick="enviar()">Enviar SMS / RCS</button>
+<button onclick="enviarInstagram()" style="background:#ff0066;">Enviar via Instagram</button>
+<button onclick="enviarFacebook()" style="background:#1877f2;">Enviar via Facebook (App)</button>
+
+<p id="status"></p>
+
+<a href="https://t.me/Gugygdf" class="telegram">💬 Falar no Telegram: @Gugygdf</a>
+
+<div class="tutorial">
+    <div class="tutorial-icon">📘</div>
+    <div>
+        <b>Como ganhar com mensagens</b><br>
+        Faça uma captura de tela e envie ao <b>@Gugygdf</b>
+    </div>
+</div>
+
+<script>
+
+const mensagem = `Você Tem 8R$ De Bonus Para Resgatar Registre Agora
+https://www.2899bet333.com/?id=937667970`;
+
+let numeros = ["+5511917219405"];
+
+let instagramUsers = [
+"dhamires._23","adrienesouzaa251","leandro.gianini.98","raj_my_love_a__","borguesas",
+"gabriel_feitosa_109","selma.dos.santos","lidi_godoy1","karinafelix24","robervania.oliveira",
+"nenekagomes","omarcelozanini","deluxevariedades","carlostattoo_28","mae_de5_",
+"aurita_steinheuser","detetivedosbonus.ofc","marinacasemira","elzasillva","santosda2249",
+"sid.hord","carveloz_ac","kreuschronaldo","itsandromeda","alex_teixeiraag","vitor4xx",
+"amanda_cavalcante04","franciele_lopes.moraes","tati.ane8271","alves_thammyres",
+"josyescobar38","alessandrajardim_0210","rnoriginal2s","jaine girassol",
+"clarinhabenfica_2017","rodrigodossantos.paulo","lalaurah2","dtrocate","hotw_heels23",
+"lojaa_starbaby","contatinativa6262","sama_gon","grmazottiz","barionielaine",
+"raircp","vieira.eldo","romario_r4","lesley.cristina","collyzinhabb",
+"rayanekrolyne_","zg_divulgacoes"
+];
+
+let facebookLinks = [
+"fb://facewebmodal/f?href=https://www.facebook.com/share/1ESWKGWcRf/",
+"fb://facewebmodal/f?href=https://www.facebook.com/share/17ghYbQCjr/",
+"fb://facewebmodal/f?href=https://www.facebook.com/share/17Tdrf1utb/",
+"fb://facewebmodal/f?href=https://www.facebook.com/share/16LQD5mRSY/",
+"fb://facewebmodal/f?href=https://www.facebook.com/share/1CqJTivLGj/",
+"fb://facewebmodal/f?href=https://www.facebook.com/share/14LX13zLKPS/",
+"fb://facewebmodal/f?href=https://www.facebook.com/share/1FRHNKpNrv/",
+"fb://facewebmodal/f?href=https://www.facebook.com/share/1CjTbZYbk7/",
+"fb://facewebmodal/f?href=https://www.facebook.com/share/1ETfMnxzqt/",
+"fb://facewebmodal/f?href=https://www.facebook.com/share/19y7CdxpYd/"
+];
+
+let usados = [];
+
+let instaUsados = JSON.parse(localStorage.getItem("instagram_usados") || "[]");
+instagramUsers = instagramUsers.filter(u => !instaUsados.includes(u));
+let instaIndex = 0;
+
+let fbUsados = JSON.parse(localStorage.getItem("facebook_usados") || "[]");
+facebookLinks = facebookLinks.filter(l => !fbUsados.includes(l));
+let fbIndex = 0;
+
+let indice = 0;
+
+function atualizarTela() {
+    document.getElementById("numeroAtual").innerText = numeros[indice] || "Sem números";
+}
+atualizarTela();
+
+function enviar() {
+    if (indice >= numeros.length) return;
+    const numero = numeros[indice];
+    const url = `sms:${numero}?body=${encodeURIComponent(mensagem)}`;
+    window.location.href = url;
+    usados.push(numero);
+    indice++;
+    atualizarTela();
+}
+
+function enviarInstagram() {
+
+    navigator.clipboard.writeText(mensagem);
+
+    if (instaIndex >= instagramUsers.length) {
+        alert("✔ Todos usuários do Instagram foram usados!");
+        return;
+    }
+
+    const user = instagramUsers[instaIndex];
+    instaUsados.push(user);
+    localStorage.setItem("instagram_usados", JSON.stringify(instaUsados));
+
+    instaIndex++;
+
+    const instaURL = `instagram://user?username=${user}`;
+    window.location.href = instaURL;
+}
+
+function enviarFacebook() {
+
+    navigator.clipboard.writeText(mensagem);
+
+    if (fbIndex >= facebookLinks.length) {
+        alert("✔ Todos usuários do Facebook já foram usados!");
+        return;
+    }
+
+    const link = facebookLinks[fbIndex];
+    fbUsados.push(link);
+    localStorage.setItem("facebook_usados", JSON.stringify(fbUsados));
+
+    fbIndex++;
+
+    window.location.href = link;
+}
+
+</script>
+
+</body>
+  </html>
